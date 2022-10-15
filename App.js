@@ -1,7 +1,4 @@
-// import React in our code
 import React, { useEffect, useState } from 'react';
-
-// import all the components we are going to use
 import {
   SafeAreaView,
   StyleSheet,
@@ -10,9 +7,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-
-//importing library to use Stopwatch and Timer
-import { Stopwatch, Timer } from 'react-native-stopwatch-timer';
+import { Timer } from 'react-native-stopwatch-timer';
 
 const App = () => {
   const [isTimerStart, setIsTimerStart] = useState(false);
@@ -30,17 +25,12 @@ const App = () => {
           <Timer
             totalDuration={timerDuration}
             msecs
-            //Time Duration
             start={isTimerStart}
-            //To start
             reset={resetTimer}
-            //To reset
             options={options}
-            //options for the styling
             handleFinish={() => {
               alert('Custom Completion Function');
             }}
-            //can call a function On finish of the time
             getTime={(time) => {
               console.log(time);
             }}
