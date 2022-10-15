@@ -1,5 +1,5 @@
 // import React in our code
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // import all the components we are going to use
 import {
@@ -16,9 +16,12 @@ import { Stopwatch, Timer } from 'react-native-stopwatch-timer';
 
 const App = () => {
   const [isTimerStart, setIsTimerStart] = useState(false);
-  const [timerDuration, setTimerDuration] = useState(2000);
+  const [timerDuration, setTimerDuration] = useState(10000);
   const [resetTimer, setResetTimer] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState("");
+
+  useEffect(() => {
+    setResetTimer(true);
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -60,13 +63,17 @@ const App = () => {
           </TouchableHighlight>
           <Picker
             style={{ height: 50, width: 150 }}
-            selectedValue={selectedLanguage}
+            selectedValue={timerDuration}
             mode='dropdown'
             onValueChange={(itemValue, itemIndex) =>
-              setSelectedLanguage(itemValue)
+              setTimerDuration(itemValue)
             }>
-            <Picker.Item label="Java" value="java" />
-            <Picker.Item label="JavaScript" value="js" />
+            <Picker.Item label="10" value={10000} />
+            <Picker.Item label="20" value={20000} />
+            <Picker.Item label="30" value={30000} />
+            <Picker.Item label="40" value={40000} />
+            <Picker.Item label="50" value={50000} />
+            <Picker.Item label="60" value={60000} />
           </Picker>
         </View>
       </View>
