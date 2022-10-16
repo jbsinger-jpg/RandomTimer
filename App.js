@@ -35,8 +35,10 @@ const App = () => {
               reset={resetTimer}
               options={options}
               handleFinish={() => {
-                alert('Custom Completion Function');
+                // alert('Custom Completion Function');
+                // setTimerDuration(timeInMsecs * timeType);
                 setResetTimer(true);
+                // setIsTimerStart(true);
               }}
               getTime={(time) => {
                 console.log(time);
@@ -48,6 +50,8 @@ const App = () => {
               onPress={() => {
                 setIsTimerStart(!isTimerStart);
                 setResetTimer(false);
+                if (isTimerStart)
+                  setResetTimer(true);
               }}>
               <Text style={styles.buttonText}>
                 {!isTimerStart ? 'START' : 'STOP'}
