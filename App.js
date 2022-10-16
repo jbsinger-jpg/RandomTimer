@@ -11,12 +11,20 @@ import { Timer } from 'react-native-stopwatch-timer';
 
 const App = () => {
   const [isTimerStart, setIsTimerStart] = useState(false);
-  const [timerDuration, setTimerDuration] = useState(10000);
+  const [timerDuration, setTimerDuration] = useState(0);
+  const [timeInMsecs, setTimeInMsecs] = useState(0);
+  const [timeType, setTimeType] = useState(0);
   const [resetTimer, setResetTimer] = useState(false);
 
   useEffect(() => {
     setResetTimer(true);
+    // setTimerDuration(timeInMsecs * timeType);
   }, []);
+
+  useEffect(() => {
+    // Without timeInMsecs as a placeholder then timeDuration recursively stacks on itself...
+    setTimerDuration(timeInMsecs * timeType);
+  }, [timeType, timeInMsecs]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -53,17 +61,32 @@ const App = () => {
           </TouchableHighlight>
           <Picker
             style={{ height: 50, width: 150 }}
-            selectedValue={timerDuration}
+            selectedValue={timeInMsecs}
             mode='dropdown'
             onValueChange={(itemValue, itemIndex) =>
-              setTimerDuration(itemValue)
+              setTimeInMsecs(itemValue)
             }>
-            <Picker.Item label="10" value={10000} />
-            <Picker.Item label="20" value={20000} />
-            <Picker.Item label="30" value={30000} />
-            <Picker.Item label="40" value={40000} />
-            <Picker.Item label="50" value={50000} />
-            <Picker.Item label="60" value={60000} />
+            <Picker.Item label="0" value={0} />
+            <Picker.Item label="5" value={5} />
+            <Picker.Item label="10" value={10} />
+            <Picker.Item label="20" value={20} />
+            <Picker.Item label="30" value={30} />
+            <Picker.Item label="40" value={40} />
+            <Picker.Item label="50" value={50} />
+            <Picker.Item label="60" value={60} />
+          </Picker>
+
+          <Picker
+            style={{ height: 50, width: 150 }}
+            selectedValue={timeType}
+            mode='dropdown'
+            onValueChange={(itemValue, itemIndex) =>
+              setTimeType(itemValue)
+            }>
+            <Picker.Item label="null" value={0} />
+            <Picker.Item label="seconds" value={1000} />
+            <Picker.Item label="minutes" value={60000} />
+            <Picker.Item label="hours" value={3600000} />
           </Picker>
         </View>
       </View>
@@ -92,8 +115,10 @@ const styles = StyleSheet.create({
 });
 
 const options = {
+  // Uncomment backgroundColor: 'white', fontSize: 0, and color: 'white' when testing hidden timer functionality
   container: {
     backgroundColor: '#FF0000',
+    // backgroundColor: 'white',
     padding: 5,
     borderRadius: 5,
     width: 200,
@@ -101,7 +126,9 @@ const options = {
   },
   text: {
     fontSize: 25,
+    // fontSize: 0,
     color: '#FFF',
+    // color: 'white',
     marginLeft: 7,
   },
 };
