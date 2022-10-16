@@ -26,40 +26,48 @@ const App = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.sectionStyle}>
-        <Timer
-          totalDuration={timerDuration}
-          msecs
-          start={isTimerStart}
-          reset={resetTimer}
-          options={options}
-          handleFinish={() => {
-            alert('Custom Completion Function');
-            setResetTimer(true);
-          }}
-          getTime={(time) => {
-            console.log(time);
-          }}
-        />
-        <TouchableHighlight
-          onPress={() => {
-            setIsTimerStart(!isTimerStart);
-            setResetTimer(false);
-          }}>
-          <Text style={styles.buttonText}>
-            {!isTimerStart ? 'START' : 'STOP'}
-          </Text>
-        </TouchableHighlight>
-        <TouchableHighlight
-          onPress={() => {
-            setIsTimerStart(false);
-            setResetTimer(true);
-            setrandomTimeValue(Math.random());
-            setTimerDuration(timeInMsecs * timeType * randomTimeValue);
-          }}>
-          <Text style={styles.buttonText}>RANDOMIZE</Text>
-        </TouchableHighlight>
-        <View style={{ alignItems: 'flex-start' }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <View style={{ alignItems: 'center', position: 'absolute', top: 70 }}>
+          <View style={{ marginVertical: 10 }}>
+            <Timer
+              totalDuration={timerDuration}
+              msecs
+              start={isTimerStart}
+              reset={resetTimer}
+              options={options}
+              handleFinish={() => {
+                alert('Custom Completion Function');
+                setResetTimer(true);
+              }}
+              getTime={(time) => {
+                console.log(time);
+              }}
+            />
+          </View >
+          <View style={{ marginVertical: 10 }}>
+            <TouchableHighlight
+              onPress={() => {
+                setIsTimerStart(!isTimerStart);
+                setResetTimer(false);
+              }}>
+              <Text style={styles.buttonText}>
+                {!isTimerStart ? 'START' : 'STOP'}
+              </Text>
+            </TouchableHighlight>
+          </View>
+          <View style={{ marginVertical: 10 }}>
+            <TouchableHighlight
+              onPress={() => {
+                setIsTimerStart(false);
+                setResetTimer(true);
+                setrandomTimeValue(Math.random());
+                setTimerDuration(timeInMsecs * timeType * randomTimeValue);
+              }}>
+              <Text style={styles.buttonText}>RANDOMIZE</Text>
+            </TouchableHighlight>
+          </View>
+        </View>
+        <View style={{ alignItems: 'flex-start', position: 'absolute', bottom: 200 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 40 }}>
             <Text> Time Duration </Text>
             <Picker
               style={{ height: 50, width: 150 }}
