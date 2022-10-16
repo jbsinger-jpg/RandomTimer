@@ -36,6 +36,8 @@ const App = () => {
               options={options}
               handleFinish={() => {
                 setResetTimer(true);
+                setIsTimerStart(!isTimerStart);
+                alert("Timer finished");
               }}
               getTime={(time) => {
                 console.log(time);
@@ -138,7 +140,6 @@ const options = {
   },
   text: {
     fontSize: 25,
-    // fontSize: 0,
     color: '#FFF',
     // color: 'white',
     marginLeft: 7,
