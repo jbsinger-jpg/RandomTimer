@@ -43,9 +43,10 @@ const App = () => {
                 console.log(time);
               }}
             />
-          </View >
-          <View style={{ marginVertical: 10 }}>
+          </View>
+          <View style={{ marginVertical: 10, borderWidth: 3, borderColor: 'black', paddingHorizontal: 20, paddingBottom: 5 }}>
             <TouchableHighlight
+              underlayColor={'gray'}
               onPress={() => {
                 setIsTimerStart(!isTimerStart);
                 setResetTimer(false);
@@ -57,8 +58,9 @@ const App = () => {
               </Text>
             </TouchableHighlight>
           </View>
-          <View style={{ marginVertical: 10 }}>
+          <View style={{ marginVertical: 10, borderWidth: 3, borderColor: 'black', paddingHorizontal: 20, paddingBottom: 5 }}>
             <TouchableHighlight
+              underlayColor={'gray'}
               onPress={() => {
                 setIsTimerStart(false);
                 setResetTimer(true);
@@ -70,8 +72,8 @@ const App = () => {
           </View>
         </View>
         <View style={{ alignItems: 'flex-start', position: 'absolute', bottom: 200 }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 40 }}>
-            <Text> Time Duration </Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 40, borderWidth: 3, borderColor: 'black' }}>
+            <Text style={{ fontSize: 20 }}> Time Duration </Text>
             <Picker
               style={{ height: 50, width: 150 }}
               selectedValue={timeInMsecs}
@@ -88,8 +90,8 @@ const App = () => {
               <Picker.Item label="60" value={60} />
             </Picker>
           </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Text> Time Unit </Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', borderWidth: 3, borderColor: 'black' }}>
+            <Text style={{ fontSize: 20 }}> Time Unit </Text>
             <Picker
               style={{ height: 50, width: 150 }}
               selectedValue={timeType}
