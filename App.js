@@ -19,6 +19,7 @@ const App = () => {
   const [randomButtonPressed, setRandomButtonPressed] = useState(false);
   const [timeUnitButtonPressed, setTimeUnitButtonPressed] = useState(false);
   const [timeDurationButtonPressed, setTimeDurationButtonPressed] = useState(false);
+
   useEffect(() => {
     // Without timeInMsecs as a placeholder then timeDuration recursively stacks on itself...
     setrandomTimeValue(Math.random());
