@@ -16,7 +16,6 @@ const App = () => {
   const [randomTimeValue, setrandomTimeValue] = useState(Math.random());
   const [timerDuration, setTimerDuration] = useState(timeInMsecs * timeType * randomTimeValue);
   const [resetTimer, setResetTimer] = useState(false);
-  const [timerButtonPressed, setTimerButtonPressed] = useState(false);
   const [randomButtonPressed, setRandomButtonPressed] = useState(false);
   const [timeUnitButtonPressed, setTimeUnitButtonPressed] = useState(false);
   const [timeDurationButtonPressed, setTimeDurationButtonPressed] = useState(false);
@@ -36,51 +35,45 @@ const App = () => {
           reset={resetTimer}
           options={options}
           handleFinish={() => {
-            setResetTimer(true);
-            setIsTimerStart(!isTimerStart);
-            alert("Timer finished");
+            alert('Custom Completion Function');
           }}
+          //can call a function On finish of the time
           getTime={(time) => {
             console.log(time);
           }}
         />
         <View style={{ alignItems: 'center', position: 'absolute', top: 70, flexDirection: 'row' }}>
           <TouchableHighlight
-            underlayColor={'gray'}
-            onPressOut={() => {
-              setTimerButtonPressed(false);
-            }}
-            onPressIn={() => {
-              setTimerButtonPressed(true);
-            }}
             onPress={() => {
               setIsTimerStart(!isTimerStart);
               setResetTimer(false);
-              if (isTimerStart)
-                setResetTimer(true);
             }}>
-            <Text style={timerButtonPressed ? styles.timerButtonPressedText : styles.buttonText}>
+            <Text style={styles.buttonText}>
               {!isTimerStart ? 'START' : 'STOP'}
             </Text>
           </TouchableHighlight>
-          <View style={{ ...styles.containerRow, paddingBottom: 10, paddingHorizontal: 5 }}>
-            <TouchableHighlight
-              underlayColor={'gray'}
-              onPressOut={() => {
-                setRandomButtonPressed(false);
-              }}
-              onPressIn={() => {
-                setRandomButtonPressed(true);
-              }}
-              onPress={() => {
-                setIsTimerStart(false);
-                setResetTimer(true);
-                setrandomTimeValue(Math.random());
-                setTimerDuration(timeInMsecs * timeType * randomTimeValue);
-              }}>
-              <Text style={randomButtonPressed ? styles.timerButtonPressedText : styles.buttonText}> RANDOMIZE</Text>
-            </TouchableHighlight>
-          </View>
+          {!isTimerStart &&
+            <View style={{ ...styles.containerRow, paddingBottom: 10, paddingHorizontal: 5 }}>
+              <TouchableHighlight
+                underlayColor={'gray'}
+                onPressOut={() => {
+                  setRandomButtonPressed(false);
+                }}
+                onPressIn={() => {
+                  setRandomButtonPressed(true);
+                }}
+                onPress={() => {
+                  setIsTimerStart(false);
+                  setResetTimer(true);
+
+                  if (!isTimerStart) {
+                    setrandomTimeValue(Math.random());
+                    setTimerDuration(timeInMsecs * timeType * randomTimeValue);
+                  }
+                }}>
+                <Text style={randomButtonPressed ? styles.timerButtonPressedText : styles.buttonText}> RESET </Text>
+              </TouchableHighlight>
+            </View>}
         </View>
         <View style={{ alignItems: 'center', position: 'absolute', bottom: 200 }}>
           <View style={{ flexDirection: 'row' }}>
