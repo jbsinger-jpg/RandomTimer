@@ -49,7 +49,8 @@ const TimerContainer = () => {
                         onPress={() => {
                             setIsTimerStart(!isTimerStart);
                             setResetTimer(false);
-                        }}>
+                        }}
+                    >
                         <Text style={styles.buttonText}>
                             {!isTimerStart ? 'START' : 'STOP'}
                         </Text>
@@ -77,7 +78,7 @@ const TimerContainer = () => {
                             </TouchableHighlight>
                         </View>}
                 </View>
-                <View style={{ alignItems: 'center', position: 'absolute', bottom: 200 }}>
+                <View style={{ alignItems: 'center', position: 'absolute', top: 400 }}>
                     <View style={{ flexDirection: 'row' }}>
                         <View style={styles.containerRow}>
                             <Text style={timeDurationButtonPressed ? styles.timerButtonPressedText : styles.buttonText}> Time Duration</Text>
@@ -131,9 +132,13 @@ const TimerContainer = () => {
                         </View>
                     </View>
                 </View>
+                <View style={{ alignItems: 'flex-start', position: 'absolute', right: 150, top: 600 }}>
+                    {/* Place an Icon here */}
+                    <Text>Icon Placeholder</Text>
+                </View>
             </View>
         </SafeAreaView >
     );
 };
 
-export default App;
+export default TimerContainer;
