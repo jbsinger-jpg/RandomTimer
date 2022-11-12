@@ -10,20 +10,24 @@ const HomeScreen = () => {
         <SafeAreaView style={styles.container}>
             <View style={styles.sectionStyle}>
                 <View style={{ alignItems: 'center', position: 'absolute', top: 70, flexDirection: 'row' }}>
-                    {/* Make a button here to trigger the app and remove App start button view */}
                     {!displayApp &&
-                        <View style={{ ...styles.containerRow, paddingBottom: 10, paddingHorizontal: 5 }}>
-                            <TouchableHighlight
-                                onPress={() => {
-                                    setDisplayApp(true);
-                                }}
-                            >
-                                <Text> App Start Button </Text>
-                            </TouchableHighlight>
+                        <View style={{ flexDirection: 'column' }}>
+                            <View style={{ ...styles.containerColumn, paddingBottom: 10, paddingHorizontal: 5 }}>
+                                <TouchableHighlight
+                                    onPress={() => {
+                                        setDisplayApp(true);
+                                    }}
+                                >
+                                    <Text style={styles.buttonText}> App Start Button </Text>
+                                </TouchableHighlight>
+                            </View>
+                            <View style={{ ...styles.containerColumn, paddingBottom: 10, paddingHorizontal: 5 }}>
+                                <Text> Mp3 stuff</Text>
+                            </View>
                         </View>
                     }
                     {displayApp &&
-                        <TimerContainer />
+                        <TimerContainer setDisplayApp={setDisplayApp} />
                     }
                 </View>
             </View>

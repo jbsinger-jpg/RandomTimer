@@ -23,9 +23,16 @@ export const styles = StyleSheet.create({
     containerRow: {
         flexDirection: 'row',
         alignItems: 'center',
-        margin: 20,
+        margin: 10,
         borderWidth: 3,
-        borderColor: 'black'
+        borderColor: 'black',
+    },
+    bottomLeftContainer: {
+        alignItems: 'center',
+        position: 'absolute',
+        bottom: 10,
+        left: 15,
+        flexDirection: 'row',
     }
 });
 

@@ -26,5 +26,12 @@ export const styles = StyleSheet.create({
         margin: 20,
         borderWidth: 3,
         borderColor: 'black'
+    },
+    containerColumn: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        margin: 20,
+        borderWidth: 3,
+        borderColor: 'black'
     }
 });
