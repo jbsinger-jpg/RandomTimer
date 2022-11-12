@@ -5,12 +5,10 @@ import TimerContainer from './TimerContainer';
 import Dialog from "react-native-dialog";
 import IconFontAwesome5Design from 'react-native-vector-icons/FontAwesome5';
 
-
-
 const HomeScreen = () => {
     const [displayApp, setDisplayApp] = useState(false);
     const [dialogActive, setDialogActive] = useState(false);
-    const [musicRowAmount, setMusicRowAmount] = useState([1, 2, 3, 4, 5, 6]);
+    const [musicRowAmount] = useState([1, 2, 3, 4, 5, 6]);
 
     return (
         <SafeAreaView style={styles.container}>
