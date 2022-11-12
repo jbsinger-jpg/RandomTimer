@@ -120,7 +120,6 @@ const TimerContainer = ({ setDisplayApp }) => {
                     </View>
                 </View>
                 <View style={{ alignItems: 'flex-start', position: 'absolute', left: -35, top: 600 }}>
-                    {/* Place an Icon here */}
                     <IconFontAwesome5Design
                         name='caret-left'
                         size={40}
