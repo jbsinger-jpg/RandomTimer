@@ -22,7 +22,6 @@ const TimerContainer = ({ setDisplayApp }) => {
     const [randomButtonPressed, setRandomButtonPressed] = useState(false);
 
     useEffect(() => {
-        // Without timeInMsecs as a placeholder then timeDuration recursively stacks on itself...
         setrandomTimeValue(Math.random());
         setTimerDuration(timeInMsecs * timeType * randomTimeValue);
     }, [timeType, timeInMsecs]);
@@ -90,7 +89,7 @@ const TimerContainer = ({ setDisplayApp }) => {
                                 style={{ height: 50, width: 40 }}
                                 selectedValue={timeInMsecs}
                                 mode='dialog'
-                                onValueChange={(itemValue, itemIndex) =>
+                                onValueChange={(itemValue) =>
                                     setTimeInMsecs(itemValue)
                                 }>
                                 <Picker.Item label="5" value={5} />
@@ -108,7 +107,7 @@ const TimerContainer = ({ setDisplayApp }) => {
                                 style={{ height: 50, width: 40 }}
                                 selectedValue={timeType}
                                 mode='dialog'
-                                onValueChange={(itemValue, itemIndex) =>
+                                onValueChange={(itemValue) =>
                                     setTimeType(itemValue)
                                 }
                             >
@@ -128,7 +127,7 @@ const TimerContainer = ({ setDisplayApp }) => {
                     />
                 </View>
             </View>
-        </SafeAreaView >
+        </SafeAreaView>
     );
 };
 
