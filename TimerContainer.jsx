@@ -10,9 +10,9 @@ import { Picker } from '@react-native-picker/picker';
 import { Timer } from 'react-native-stopwatch-timer';
 import { options, styles } from './TimerContainerStyles';
 import IconFontAwesome5Design from 'react-native-vector-icons/FontAwesome5';
+import { Audio } from 'expo-av';
 
-
-const TimerContainer = ({ setDisplayApp }) => {
+const TimerContainer = ({ setDisplayApp, ringtone }) => {
     const [isTimerStart, setIsTimerStart] = useState(false);
     const [timeInMsecs, setTimeInMsecs] = useState(5);
     const [timeType, setTimeType] = useState(1000);
@@ -20,15 +20,42 @@ const TimerContainer = ({ setDisplayApp }) => {
     const [timerDuration, setTimerDuration] = useState(timeInMsecs * timeType * randomTimeValue);
     const [resetTimer, setResetTimer] = useState(false);
     const [randomButtonPressed, setRandomButtonPressed] = useState(false);
+    const [ringTone, setRingTone] = useState(null);
+    const [timerIsDead, setTimerIsDead] = useState(false);
+
+    async function playRingSound() {
+        const { sound } = await Audio.Sound.createAsync(
+            { uri: ringtone },
+            { shouldPlay: true }
+        );
+
+        if (sound) {
+            sound.setIsLoopingAsync(false);
+            setRingTone(sound);
+            sound.playAsync();
+        }
+    };
+
+    async function stopRingSound() {
+        if (ringTone)
+            await ringTone.stopAsync();
+        setTimerIsDead(false);
+    };
+
+    const handleCaretPress = () => {
+        setDisplayApp(false);
+        stopRingSound();
+    };
 
     useEffect(() => {
         setrandomTimeValue(Math.random());
         setTimerDuration(timeInMsecs * timeType * randomTimeValue);
     }, [timeType, timeInMsecs]);
 
-    const handleCaretPress = () => {
-        setDisplayApp(false);
-    };
+    useEffect(() => {
+        if (timerIsDead)
+            playRingSound();
+    }, [timerIsDead]);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -40,7 +67,9 @@ const TimerContainer = ({ setDisplayApp }) => {
                     reset={resetTimer}
                     options={options}
                     handleFinish={() => {
-                        alert('Custom Completion Function');
+                        if (!timerIsDead) {
+                            setTimerIsDead(true);
+                        }
                     }}
                     //can call a function On finish of the time
                     getTime={(time) => {
@@ -52,6 +81,7 @@ const TimerContainer = ({ setDisplayApp }) => {
                         onPress={() => {
                             setIsTimerStart(!isTimerStart);
                             setResetTimer(false);
+                            stopRingSound();
                         }}
                     >
                         <Text style={styles.buttonText}>

@@ -12,6 +12,7 @@ const HomeScreen = () => {
     const [musicRowAmount] = useState([1, 2, 3, 4, 5, 6]);
     const [hasMediaLibPermsssions, setHasMediaLibPermissions] = useState(false);
     const [audioFiles, setAudioFiles] = useState([]);
+    const [ringtone, setRingtone] = useState(null);
 
     const getAudioFiles = async () => {
         let result = await MediaLibrary.getAssetsAsync({
@@ -78,9 +79,14 @@ const HomeScreen = () => {
                                         Choose from either our library or your device
                                     </Dialog.Description>
                                     <ScrollView>
-                                        {audioFiles && audioFiles?.assets?.map(audio => {
+                                        {audioFiles && audioFiles?.assets?.map((audio, index) => {
                                             return (
-                                                <Text>{audio.filename}</Text>
+                                                <TouchableHighlight key={index} onPress={() => {
+                                                    setRingtone(audio.uri);
+                                                    console.log(audio.uri);
+                                                }}>
+                                                    <Text>{audio.filename}</Text>
+                                                </TouchableHighlight>
                                             );
                                         })}
                                     </ScrollView>
@@ -90,7 +96,7 @@ const HomeScreen = () => {
                         </>
                     }
                     {displayApp &&
-                        <TimerContainer setDisplayApp={setDisplayApp} />
+                        <TimerContainer setDisplayApp={setDisplayApp} ringtone={ringtone} />
                     }
                 </View>
             </View>
