@@ -13,8 +13,10 @@ export const styles = StyleSheet.create({
         alignContent: 'center'
     },
     buttonText: {
-        fontSize: 20,
+        fontSize: 15,
         marginTop: 10,
+        fontFamily: 'monospace',
+        fontWeight: 'bold'
     },
     timerButtonPressedText: {
         fontSize: 15,

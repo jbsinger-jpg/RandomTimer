@@ -11,6 +11,7 @@ import { Timer } from 'react-native-stopwatch-timer';
 import { options, styles } from './TimerContainerStyles';
 import IconFontAwesome5Design from 'react-native-vector-icons/FontAwesome5';
 import { Audio } from 'expo-av';
+import { Button } from 'react-native-paper';
 
 const TimerContainer = ({ setDisplayApp, ringtone }) => {
     const [isTimerStart, setIsTimerStart] = useState(false);
@@ -77,20 +78,24 @@ const TimerContainer = ({ setDisplayApp, ringtone }) => {
                     }}
                 />
                 <View style={{ alignItems: 'center', position: 'absolute', top: 70, flexDirection: 'row' }}>
-                    <TouchableHighlight
-                        onPress={() => {
-                            setIsTimerStart(!isTimerStart);
-                            setResetTimer(false);
-                            stopRingSound();
-                        }}
-                    >
-                        <Text style={styles.buttonText}>
-                            {!isTimerStart ? 'START' : 'STOP'}
-                        </Text>
-                    </TouchableHighlight>
+                    <View style={{ ...styles.containerRow, paddingBottom: 10, paddingHorizontal: 5 }}>
+                        <Button
+                            color='black'
+                            onPress={() => {
+                                setIsTimerStart(!isTimerStart);
+                                setResetTimer(false);
+                                stopRingSound();
+                            }}
+                        >
+                            <Text style={styles.buttonText}>
+                                {!isTimerStart ? 'START' : 'STOP'}
+                            </Text>
+                        </Button>
+                    </View>
                     {!isTimerStart &&
                         <View style={{ ...styles.containerRow, paddingBottom: 10, paddingHorizontal: 5 }}>
-                            <TouchableHighlight
+                            <Button
+                                color='black'
                                 underlayColor={'gray'}
                                 onPressOut={() => {
                                     setRandomButtonPressed(false);
@@ -108,8 +113,9 @@ const TimerContainer = ({ setDisplayApp, ringtone }) => {
                                     }
                                 }}>
                                 <Text style={randomButtonPressed ? styles.timerButtonPressedText : styles.buttonText}> SHUFFLE </Text>
-                            </TouchableHighlight>
-                        </View>}
+                            </Button>
+                        </View>
+                    }
                 </View>
                 <View style={{ alignItems: 'center', position: 'absolute', top: 400 }}>
                     <View style={{ flexDirection: 'row' }}>
