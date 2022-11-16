@@ -26,8 +26,6 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         margin: 10,
-        borderWidth: 3,
-        borderColor: 'black',
     },
     bottomLeftContainer: {
         alignItems: 'center',

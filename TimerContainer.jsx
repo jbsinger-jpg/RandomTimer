@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {
     SafeAreaView,
-    StyleSheet,
     Text,
-    View,
-    TouchableHighlight,
+    View
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { Timer } from 'react-native-stopwatch-timer';
@@ -61,25 +59,31 @@ const TimerContainer = ({ setDisplayApp, ringtone }) => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.sectionStyle}>
-                <Timer
-                    totalDuration={timerDuration}
-                    msecs
-                    start={isTimerStart}
-                    reset={resetTimer}
-                    options={options}
-                    handleFinish={() => {
-                        if (!timerIsDead) {
-                            setTimerIsDead(true);
-                        }
-                    }}
-                    //can call a function On finish of the time
-                    getTime={(time) => {
-                        console.log(time);
-                    }}
-                />
+                <View style={{ opacity: 0 }}>
+                    <Timer
+                        totalDuration={timerDuration}
+                        msecs
+                        start={isTimerStart}
+                        reset={resetTimer}
+                        options={options}
+                        handleFinish={() => {
+                            if (!timerIsDead) {
+                                setTimerIsDead(true);
+                            }
+                        }}
+                        //can call a function On finish of the time
+                        getTime={(time) => {
+                            console.log(time);
+                        }}
+                    />
+                </View>
                 <View style={{ alignItems: 'center', position: 'absolute', top: 70, flexDirection: 'row' }}>
                     <View style={{ ...styles.containerRow, paddingBottom: 10, paddingHorizontal: 5 }}>
                         <Button
+                            style={{
+                                borderWidth: 3,
+                                borderColor: 'black',
+                            }}
                             color='black'
                             onPress={() => {
                                 setIsTimerStart(!isTimerStart);
@@ -95,6 +99,10 @@ const TimerContainer = ({ setDisplayApp, ringtone }) => {
                     {!isTimerStart &&
                         <View style={{ ...styles.containerRow, paddingBottom: 10, paddingHorizontal: 5 }}>
                             <Button
+                                style={{
+                                    borderWidth: 3,
+                                    borderColor: 'black',
+                                }}
                                 color='black'
                                 underlayColor={'gray'}
                                 onPressOut={() => {
@@ -119,7 +127,11 @@ const TimerContainer = ({ setDisplayApp, ringtone }) => {
                 </View>
                 <View style={{ alignItems: 'center', position: 'absolute', top: 400 }}>
                     <View style={{ flexDirection: 'row' }}>
-                        <View style={styles.containerRow}>
+                        <View style={{
+                            ...styles.containerRow,
+                            borderWidth: 3,
+                            borderColor: 'black'
+                        }}>
                             <Text style={styles.buttonText}> Time Duration </Text>
                             <Picker
                                 style={{ height: 50, width: 40 }}
@@ -137,10 +149,17 @@ const TimerContainer = ({ setDisplayApp, ringtone }) => {
                                 <Picker.Item label="60" value={60} />
                             </Picker>
                         </View>
-                        <View style={styles.containerRow}>
+                        <View style={{
+                            ...styles.containerRow,
+                            borderWidth: 3,
+                            borderColor: 'black'
+                        }}>
                             <Text style={styles.buttonText}> Time Unit </Text>
                             <Picker
-                                style={{ height: 50, width: 40 }}
+                                style={{
+                                    height: 50,
+                                    width: 40,
+                                }}
                                 selectedValue={timeType}
                                 mode='dialog'
                                 onValueChange={(itemValue) =>
@@ -154,13 +173,17 @@ const TimerContainer = ({ setDisplayApp, ringtone }) => {
                         </View>
                     </View>
                 </View>
-                <View style={{ alignItems: 'flex-start', position: 'absolute', left: -35, top: 600 }}>
-                    <IconFontAwesome5Design
-                        name='caret-left'
-                        size={40}
-                        onPress={() => handleCaretPress()}
+                <View style={{ alignItems: 'flex-start', position: 'absolute', left: -70, top: 600 }}>
+                    <Button
                         color='black'
-                    />
+                        onPress={() => handleCaretPress()}
+                    >
+                        <IconFontAwesome5Design
+                            name='caret-left'
+                            size={60}
+                            color='black'
+                        />
+                    </Button>
                 </View>
             </View>
         </SafeAreaView>

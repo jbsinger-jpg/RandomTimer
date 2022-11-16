@@ -1,4 +1,5 @@
 import {
+  ImageBackground,
   SafeAreaView,
   View,
 } from 'react-native';
@@ -7,11 +8,13 @@ import { styles } from './AppStyles';
 
 const App = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.sectionStyle}>
-        <HomeScreen />
-      </View>
-    </SafeAreaView >
+    <ImageBackground source={require('./backgroundImage.jpg')} style={styles.backgroundImage} >
+      <SafeAreaView style={styles.container}>
+        <View style={styles.sectionStyle}>
+          <HomeScreen />
+        </View>
+      </SafeAreaView >
+    </ImageBackground>
   );
 };
 

@@ -33,7 +33,5 @@ export const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         margin: 20,
-        borderWidth: 3,
-        borderColor: 'black'
     }
 });

@@ -5,6 +5,7 @@ import TimerContainer from './TimerContainer';
 import Dialog from "react-native-dialog";
 import * as MediaLibrary from 'expo-media-library';
 import { Button, Card } from 'react-native-paper';
+import IconFontAwesome5Design from 'react-native-vector-icons/FontAwesome5';
 
 const HomeScreen = () => {
     const [displayApp, setDisplayApp] = useState(false);
@@ -29,10 +30,10 @@ const HomeScreen = () => {
     }, []);
 
     useEffect(() => {
-        if (hasMediaLibPermsssions) {
+        if (hasMediaLibPermsssions && dialogActive) {
             getAudioFiles();
         }
-    }, [hasMediaLibPermsssions]);
+    }, [hasMediaLibPermsssions, dialogActive]);
 
     if (!hasMediaLibPermsssions)
         return <View></View>;
@@ -46,30 +47,46 @@ const HomeScreen = () => {
                             <View style={{ flexDirection: 'column' }}>
                                 <View style={{ ...styles.containerColumn, paddingBottom: 10, paddingHorizontal: 5 }}>
                                     <Button
+                                        style={{ width: 200, borderWidth: 3, borderColor: 'black' }}
                                         color='black'
                                         onPress={() => {
                                             setDisplayApp(true);
                                         }}
                                     >
-                                        <Text style={styles.buttonText}> App Start Button </Text>
+                                        <IconFontAwesome5Design
+                                            name='play'
+                                            size={40}
+                                            color='black'
+                                        />
                                     </Button>
                                 </View>
-                                <View style={{ ...styles.containerColumn, paddingBottom: 10, paddingHorizontal: 5 }}>
-                                    <Button color='black' onPress={() => setDialogActive(!dialogActive)}>
-                                        <Text style={styles.buttonText}>Select Ringtone</Text>
+                                <View style={{ ...styles.containerColumn, paddingBottom: 10, paddingHorizontal: 15 }}>
+                                    <Button
+                                        style={{ width: 200, borderWidth: 3, borderColor: 'black' }}
+                                        color='black'
+                                        onPress={() => {
+                                            setDialogActive(!dialogActive);
+                                        }}
+                                    >
+                                        <Text style={styles.buttonText}>Select </Text>
+                                        <IconFontAwesome5Design
+                                            name='music'
+                                            size={40}
+                                            color='black'
+                                        />
                                     </Button>
                                 </View>
                             </View>
                             <View>
                                 <Dialog.Container visible={dialogActive}>
-                                    <Dialog.Title style={styles.buttonText}>Audio Files</Dialog.Title>
+                                    <Dialog.Title style={styles.buttonText}>Playable Audio</Dialog.Title>
                                     <Dialog.Description style={styles.buttonText}>
-                                        Choose from your device
+                                        Choose from your device which tune you want to play as a ringtone when timer finishes.
                                     </Dialog.Description>
                                     <ScrollView>
                                         {audioFiles && audioFiles?.assets?.map((audio, index) => {
                                             return (
-                                                <View style={{ margin: 10 }}>
+                                                <View key={index} style={{ margin: 10 }}>
                                                     <Card elevation={2} mode='outlined'>
                                                         <Card.Title title={audio.filename} />
                                                         <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
@@ -79,7 +96,6 @@ const HomeScreen = () => {
                                                                 color='black'
                                                                 onPress={() => {
                                                                     setRingtone(audio.uri);
-                                                                    console.log(audio);
                                                                 }}>
                                                                 <Text>Select "{audio.filename}"</Text>
                                                             </Button>

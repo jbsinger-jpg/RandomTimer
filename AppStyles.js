@@ -26,5 +26,11 @@ export const styles = StyleSheet.create({
         margin: 20,
         borderWidth: 3,
         borderColor: 'black'
-    }
+    },
+    backgroundImage: {
+        flex: 1,
+        resizeMode: "stretch",
+        width: "100%",
+        alignItems: "center",
+    },
 });
